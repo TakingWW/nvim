@@ -5,8 +5,8 @@ vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 
 vim.cmd([[
-    hi insert guibg='#f5c359'
+    hi inserte guibg='#D0F5BE'
     hi normale guibg='#F1D4E5'
-    set guicursor=i:block-insert
-    set guicursor=n:block-normale
+    hi visuale guibg='#E57C23'
+    set guicursor=n:block-normale,i:block-inserte,v:block-visuale
 ]])

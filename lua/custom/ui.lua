@@ -1,15 +1,76 @@
+local fn = vim.fn
 local M = {}
+local C = {}
+
+C.modes = {
+    ["n"] = { "NORMAL", "St_NormalMode" },
+    ["no"] = { "NORMAL (no)", "St_NormalMode" },
+    ["nov"] = { "NORMAL (nov)", "St_NormalMode" },
+    ["noV"] = { "NORMAL (noV)", "St_NormalMode" },
+    ["noCTRL-V"] = { "NORMAL", "St_NormalMode" },
+    ["niI"] = { "NORMAL i", "St_NormalMode" },
+    ["niR"] = { "NORMAL r", "St_NormalMode" },
+    ["niV"] = { "NORMAL v", "St_NormalMode" },
+    ["nt"] = { "NTERMINAL", "St_NTerminalMode" },
+    ["ntT"] = { "NTERMINAL (ntT)", "St_NTerminalMode" },
+
+    ["v"] = { "VISUAL", "St_VisualMode" },
+    ["vs"] = { "V-CHAR (Ctrl O)", "St_VisualMode" },
+    ["V"] = { "V-LINE", "St_VisualMode" },
+    ["Vs"] = { "V-LINE", "St_VisualMode" },
+    [""] = { "V-BLOCK", "St_VisualMode" },
+
+    ["i"] = { "INSERT", "St_InsertMode" },
+    ["ic"] = { "INSERT (completion)", "St_InsertMode" },
+    ["ix"] = { "INSERT completion", "St_InsertMode" },
+
+    ["t"] = { "TERMINAL", "St_TerminalMode" },
+
+    ["R"] = { "REPLACE", "St_ReplaceMode" },
+    ["Rc"] = { "REPLACE (Rc)", "St_ReplaceMode" },
+    ["Rx"] = { "REPLACEa (Rx)", "St_ReplaceMode" },
+    ["Rv"] = { "V-REPLACE", "St_ReplaceMode" },
+    ["Rvc"] = { "V-REPLACE (Rvc)", "St_ReplaceMode" },
+    ["Rvx"] = { "V-REPLACE (Rvx)", "St_ReplaceMode" },
+
+    ["s"] = { "SELECT", "St_SelectMode" },
+    ["S"] = { "S-LINE", "St_SelectMode" },
+    [""] = { "S-BLOCK", "St_SelectMode" },
+    ["c"] = { "COMMAND", "St_CommandMode" },
+    ["cv"] = { "COMMAND", "St_CommandMode" },
+    ["ce"] = { "COMMAND", "St_CommandMode" },
+    ["r"] = { "PROMPT", "St_ConfirmMode" },
+    ["rm"] = { "MORE", "St_ConfirmMode" },
+    ["r?"] = { "CONFIRM", "St_ConfirmMode" },
+    ["x"] = { "CONFIRM", "St_ConfirmMode" },
+    ["!"] = { "SHELL", "St_TerminalMode" },
+}
 M.custom = {
-  theme = "catppuccin",
-  nvdash =  {
-    load_on_startup = true,
-  },
-  statusline = {
-    theme = "minimal",
-    separator_style = "block"
-  },
-  tabufline = {
-    enabled = false
-  }
+    theme = "catppuccin",
+    nvdash =  {
+        load_on_startup = true,
+    },
+    statusline = {
+        theme = "vscode_colored",
+        overriden_modules = function()
+            return {
+                mode = function()
+                    local m = vim.api.nvim_get_mode().mode
+                    return "%#" .. C.modes[m][2] .. "#" .. " " .. C.modes[m][1] .. " "
+                end,
+
+                filetype = function()
+                    return ""
+                end,
+
+                cwd = function()
+                    return ""
+                end,
+    }
+    end,
+    },
+    tabufline = {
+        enabled = false
+    }
 }
 return M.custom

@@ -3,6 +3,10 @@ M.custom = {
   i = {
     ["jk"] = { "<ESC>", "escape insert mode" , opts = { nowait = true }},
   },
+    n = {
+        ["<S-TAB>"] = { "<cmd> bp <cr>", "Next buffer"},
+        ["<TAB>"] = { "<cmd> bn <cr>", "Next buffer"},
+    }
 }
 M.disabled = {
   n = {
