@@ -15,6 +15,8 @@ wk.register({
         name = "Buffer",
         b = { "<cmd> Telescope buffers <CR>", "Find buffers" },
     },
+    t = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
+    q = { "<cmd> q <CR>", "Nvchad themes" },
     l = {
         name = "Lsp",
         a = {
