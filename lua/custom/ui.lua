@@ -46,9 +46,9 @@ C.modes = {
     ["!"] = { "SHELL", "St_TerminalMode" },
 }
 M.custom = {
-    theme = "catppuccin",
+    theme = "github_light",
     nvdash =  {
-        load_on_startup = true,
+        load_on_startup = false,
     },
     statusline = {
         theme = "vscode_colored",
@@ -61,6 +61,33 @@ M.custom = {
 
                 filetype = function()
                     return ""
+                end,
+
+                fileInfo = function()
+
+                    local icon = " 󰈚 "
+                    local filename = (fn.expand "%" == "" and "Empty ") or fn.expand "%:t"
+
+                    if filename ~= "Empty " then
+                        local devicons_present, devicons = pcall(require, "nvim-web-devicons")
+
+                        if devicons_present then
+                            local ft_icon = devicons.get_icon(filename)
+                            icon = (ft_icon ~= nil and " " .. ft_icon) or ""
+                        end
+
+                        filename = " " .. filename .. " "
+                    end
+
+                    return "%#St_NTerminalMode# " .. icon .. filename
+                end,
+
+                git = function()
+                    if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
+                        return ""
+                end
+
+                    return "  " .. vim.b.gitsigns_status_dict.head .. "  "
                 end,
 
                 cwd = function()

@@ -6,6 +6,7 @@ M.custom = {
     n = {
         ["<S-TAB>"] = { "<cmd> bp <cr>", "Next buffer"},
         ["<TAB>"] = { "<cmd> bn <cr>", "Next buffer"},
+        ["x"] = { "V", "Visual select"},
     }
 }
 M.disabled = {
@@ -30,6 +31,8 @@ M.disabled = {
       ["<leader>cm"] = "",
       ["<leader>ma"] = "",
       ["<leader>gt"] = "",
+      ["<leader>gb"] = "",
+      ["<leader>ph"] = "",
       ["<leader>wa"] = "",
       ["<leader>wl"] = "",
       ["<leader>wr"] = "",
@@ -38,6 +41,12 @@ M.disabled = {
       ["<leader>ra"] = "",
       ["<leader>rn"] = "",
       ["<leader>th"] = "",
+      ["<leader>sw"] = "",
+      ["<leader>ss"] = "",
+      ["<leader>rh"] = "",
+      ["<leader>s"] = "",
+      ["<leader>v"] = "",
+      ["<leader>h"] = "",
   }
 }
 return M

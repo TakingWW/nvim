@@ -15,17 +15,24 @@ wk.register({
         c = { "<cmd> bd! <CR>", "Close" },
     },
     s = {
+        name = "Search",
         w = { "<cmd> Telescope live_grep <CR>", "Live grep" },
         s = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
     },
-    t = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
+    t = { "<cmd> Telescope themes <CR>", "Themes" },
     q = { "<cmd> q <CR>", "Quit" },
+    ["]"] = { ":set paste<CR>m`o<Esc>``:set nopaste<CR>", "Insert line below" },
+    ["["] = { ":set paste<CR>m`O<Esc>``:set nopaste<CR>", "Insert line above" },
     l = {
         name = "Lsp",
         e = { vim.diagnostic.open_float, "Diagnostic in line" },
         a = {
             function()
                 vim.lsp.buf.code_action()
-            end, "LSP code action" }
-    }
+            end, "LSP code action" },
+        r = {
+      function()
+        require("nvchad_ui.renamer").open()
+      end, "LSP rename" },
+    },
 }, { prefix = "<leader>" })
