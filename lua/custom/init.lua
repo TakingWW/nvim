@@ -1,5 +1,6 @@
 vim.opt.cmdheight = 1
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
+vim.opt.number = false
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4

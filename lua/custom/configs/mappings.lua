@@ -25,14 +25,11 @@ wk.register({
     ["["] = { ":set paste<CR>m`O<Esc>``:set nopaste<CR>", "Insert line above" },
     l = {
         name = "Lsp",
-        e = { vim.diagnostic.open_float, "Diagnostic in line" },
-        a = {
-            function()
-                vim.lsp.buf.code_action()
-            end, "LSP code action" },
-        r = {
-      function()
-        require("nvchad_ui.renamer").open()
-      end, "LSP rename" },
+        e = { function() vim.diagnostic.open_float() end, "Diagnostic in line" },
+        a = { function() vim.lsp.buf.code_action() end, "Code action" },
+        d = { function() vim.lsp.buf.definition() end, "Definition" },
+        s = { function() vim.lsp.buf.signature_help() end, "Signature help" },
+        k = { function() vim.lsp.buf.hover() end, "Hover" },
+        r = { function() require("nvchad_ui.renamer").open() end, "Rename" },
     },
 }, { prefix = "<leader>" })

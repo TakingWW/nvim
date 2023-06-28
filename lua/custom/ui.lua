@@ -46,7 +46,7 @@ C.modes = {
     ["!"] = { "SHELL", "St_TerminalMode" },
 }
 M.custom = {
-    theme = "github_light",
+    theme = "gatekeeper",
     nvdash =  {
         load_on_startup = false,
     },
@@ -65,36 +65,44 @@ M.custom = {
 
                 fileInfo = function()
 
-                    local icon = " 󰈚 "
                     local filename = (fn.expand "%" == "" and "Empty ") or fn.expand "%:t"
-
-                    if filename ~= "Empty " then
-                        local devicons_present, devicons = pcall(require, "nvim-web-devicons")
-
-                        if devicons_present then
-                            local ft_icon = devicons.get_icon(filename)
-                            icon = (ft_icon ~= nil and " " .. ft_icon) or ""
-                        end
-
-                        filename = " " .. filename .. " "
-                    end
-
-                    return "%#St_NTerminalMode# " .. icon .. filename
+                    return "%#St_NTerminalMode# " .. filename .. " "
                 end,
 
                 git = function()
                     if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
                         return ""
-                end
+                    end
 
                     return "  " .. vim.b.gitsigns_status_dict.head .. "  "
+                end,
+
+                gitchanges = function()
+                    if not vim.b.gitsigns_head or vim.b.gitsigns_git_status or vim.o.columns < 120 then
+                        return ""
+                    end
+                    local git_status = vim.b.gitsigns_status_dict
+
+                    local added = (git_status.added and git_status.added ~= 0) and ("%#St_lspInfo#  " .. git_status.added .. " ") or ""
+                    local changed = (git_status.changed and git_status.changed ~= 0)
+                    and ("%#St_lspWarning#  " .. git_status.changed .. " ")
+                    or ""
+                    local removed = (git_status.removed and git_status.removed ~= 0)
+                    and ("%#St_lspError#  " .. git_status.removed .. " ")
+                    or ""
+
+                    return (added .. changed .. removed) ~= "" and (added .. changed .. removed ) or ""
+                end,
+
+                file_encoding = function()
+                    return "a"
                 end,
 
                 cwd = function()
                     return ""
                 end,
-    }
-    end,
+            }
+        end,
     },
     tabufline = {
         enabled = false
