@@ -7,6 +7,10 @@ M.custom = {
         ["<S-TAB>"] = { "<cmd> bp <cr>", "Next buffer"},
         ["<TAB>"] = { "<cmd> bn <cr>", "Next buffer"},
         ["x"] = { "V", "Visual select"},
+    },
+    v = {
+        ["<"] = { "<gv", "Permanent selection" },
+        [">"] = { ">gv", "Permanent selection" },
     }
 }
 M.disabled = {
